@@ -4,5 +4,6 @@
 (in-package #:leap)
 
 (defun leap-year-p (year)
-  (or (and (zerop (mod year 4)) (not (zerop (mod year 100))))
-      (zerop (mod year 400))))
+  (flet ((year-div-by (div) (zerop (mod year div))))
+    (or (and (year-div-by 4) (not (year-div-by 100)))
+        (year-div-by 400))))
