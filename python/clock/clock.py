@@ -6,6 +6,12 @@ class Clock:
         self.minutes = (hour * 60 + minute) % self.MINUTES_IN_DAY
     def __str__(self):
         return "{:02}:{:02}".format(
-            (minutes // self.MINUTES_IN_HOUR) % self.HOURS_IN_DAY,
-            minutes % self.MINUTES_IN_HOUR
+            (self.minutes // self.MINUTES_IN_HOUR) % self.HOURS_IN_DAY,
+            self.minutes % self.MINUTES_IN_HOUR
         )
+    def __eq__(self, other):
+        return self.minutes == other.minutes
+    def add(self, minutes):
+        self.minutes += minutes
+        self.minutes %= self.MINUTES_IN_DAY
+        return self
