@@ -4,4 +4,25 @@
   (:export #:response-for))
 (in-package #:bob)
 
-(defun response-for (input))
+(defun response-for (input)
+  (let ((input (string-trim
+                '(#\Space #\Newline #\Backspace #\Tab
+                  #\Linefeed #\Page #\Return #\Rubout)
+                input)))
+    (cond ((and (askingp input) (yellingp input))
+           "Calm down, I know what I'm doing!")
+          ((askingp input) "Sure.")
+          ((yellingp input) "Whoa, chill out!")
+          ((saying-nothing-p input) "Fine. Be that way!")
+          (t "Whatever."))))
+
+(defun askingp (input)
+  (and (not (string= "" input))
+       (char= #\? (char input (1- (length input))))))
+
+(defun yellingp (input)
+  (and (find-if #'alpha-char-p input)
+       (string= input (string-upcase input))))
+
+(defun saying-nothing-p (input)
+  (string= "" input))
