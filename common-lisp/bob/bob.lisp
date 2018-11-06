@@ -17,8 +17,9 @@
           (t "Whatever."))))
 
 (defun askingp (input)
-  (and (not (string= "" input))
-       (char= #\? (char input (1- (length input))))))
+  (let ((length (length input)))
+    (unless (zerop length)
+      (char= #\? (char input (1- length))))))
 
 (defun yellingp (input)
   (and (find-if #'alpha-char-p input)
