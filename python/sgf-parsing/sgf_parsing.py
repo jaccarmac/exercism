@@ -26,9 +26,65 @@ class SgfTree(object):
 
 
 def parse(input_string):
-    pass
+    input_iter = iter(input_string)
+    try:
+        first = next(input_iter)
+        if first != '(':
+            raise ValueError('invalid root node')
+        return parse_node(next(input_iter), input_iter)
+    except StopIteration:
+        raise ValueError('empty input')
 
-# Nodes generally start with "(;" but the naked semicolon is a special case for
-# a single child. Since the whole thing is wrapped in parens we can basically
-# start with a None root node and do the recursive parsing process from
-# there. Then just pull that null node's single child and we have the tree.
+def parse_node(tok, input_iter):
+    if tok != ';':
+        raise ValueError('missing semicolon')
+    properties = {}
+    children = []
+    next_tok = next(input_iter)
+    while True:
+        if next_tok == ')':
+            break
+        elif next_tok == ';':
+            children = [parse_node(next_tok, input_iter)]
+            break
+        elif next_tok == '(':
+            children.append(parse_node(next(input_iter), input_iter))
+            next_tok = next(input_iter)
+        else:
+            prop_key, prop_values, next_tok = parse_property(next_tok, input_iter)
+            properties[prop_key] = prop_values
+    return SgfTree(properties, children)
+
+def parse_property(tok, input_iter):
+    key = ''
+    next_tok = tok
+    while True:
+        if next_tok == '[':
+            next_tok = next(input_iter)
+            break
+        else:
+            key += next_tok
+            next_tok = next(input_iter)
+    if not key.isupper():
+        raise ValueError('lowercase property key')
+    values = []
+    current_value = ''
+    while True:
+        if next_tok == '\\':
+            next_tok = next(input_iter)
+            if next_tok == 't':
+                current_value += ' '
+            else:
+                current_value += next_tok
+            next_tok = next(input_iter)
+        elif next_tok == ']':
+            values.append(current_value)
+            current_value = ''
+            if next(input_iter) != '[':
+                break
+            next_tok = next(input_iter)
+        else:
+            current_value += next_tok
+            next_tok = next(input_iter)
+    print(key, values)
+    return (key, values, next_tok)
