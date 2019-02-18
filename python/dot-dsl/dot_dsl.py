@@ -32,13 +32,13 @@ class Graph(object):
         addMethods = {NODE: self._addNode, EDGE: self._addEdge, ATTR: self._addAttr}
         for line in data:
             if len(line) < 2:
-                raise TypeError(f'subgraph has no arguments')
+                raise TypeError('subgraph has no arguments')
             try:
                 addMethods[line[0]](*line[1:])
             except KeyError:
-                raise ValueError(f'unknown subgraph type')
+                raise ValueError('unknown subgraph type')
             except TypeError:
-                raise ValueError(f'bad arguments for subgraph')                
+                raise ValueError('bad arguments for subgraph')                
 
     def _addNode(self, name, attrs):
         self.nodes.append(Node(name, attrs))
