@@ -11,7 +11,9 @@ class Clock:
         )
     def __eq__(self, other):
         return self.minutes == other.minutes
-    def add(self, minutes):
+    def __add__(self, minutes):
         self.minutes += minutes
         self.minutes %= self.MINUTES_IN_DAY
         return self
+    def __sub__(self, minutes):
+        return self + -minutes
