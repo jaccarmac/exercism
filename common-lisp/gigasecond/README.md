@@ -1,12 +1,12 @@
 # Gigasecond
 
-Write a program that calculates the moment when someone has lived for 10^9 seconds.
+Calculate the moment when someone has lived for 10^9 seconds.
 
 A gigasecond is 10^9 (1,000,000,000) seconds.
 
 ## Setup
 
-Check out [Exercism Help](http://exercism.io/languages/lisp) for instructions to
+Check out [Exercism Help](http://exercism.io/tracks/common-lisp) for instructions to
 get started writing Common Lisp. That page will explain how to install and setup
 a Lisp implementation and how to run the tests.
 
@@ -41,7 +41,7 @@ powerful add-on packages available. The only thing that one needs to
 do with a stock emacs to make it work well with exercism.io is to
 evaluate the following code:
 
-`(setq indent-tab-mode nil)`
+`(setq-default indent-tab-mode nil)`
 
 This can be placed in your `~/.emacs` (or `~/.emacs.d/init.el`) in
 order to have it set whenever Emacs is launched.
@@ -54,6 +54,5 @@ with the REPL; making iterative coding and testing very easy.
 
 Chapter 9 in Chris Pine's online Learn to Program tutorial. [http://pine.fm/LearnToProgram/?Chapter=09](http://pine.fm/LearnToProgram/?Chapter=09)
 
-## Submitting Incomplete Problems
+## Submitting Incomplete Solutions
 It's possible to submit an incomplete solution so you can see how others have completed the exercise.
-

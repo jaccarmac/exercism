@@ -15,7 +15,7 @@
     (is (armstrong? 153))))
 
 (deftest not-armstrong-number-100
-  (testing "Three digit number that is an Armstrong number"
+  (testing "Three digit number that is not an Armstrong number"
     (is (not (armstrong? 100)))))
 
 (deftest armstrong-number-9474
@@ -33,3 +33,7 @@
 (deftest not-armstrong-number-9926314
   (testing "Seven digit number that is not an Armstrong number"
     (is (not (armstrong? 9926314)))))
+
+(deftest armstrong-number-21897142587612075
+  (testing "Seventeen digit number that is an Armstrong number"
+    (is (armstrong? 21897142587612075))))

@@ -1,68 +1,64 @@
 # Hello World
 
-Greet the user by name, or by saying "Hello, World!" if no name is given.
+The classical introductory exercise. Just say "Hello, World!".
 
 ["Hello, World!"](http://en.wikipedia.org/wiki/%22Hello,_world!%22_program) is
-the traditional first program for beginning programming in a new language.
+the traditional first program for beginning programming in a new language
+or environment.
 
-**Note:** You can skip this exercise by running:
+The objectives are simple:
 
-    exercism skip $TRACK_ID hello-world
+- Write a function that returns the string "Hello, World!".
+- Run the test suite and make sure that it succeeds.
+- Submit your solution and check it at the website.
 
-## Specification
+If everything goes well, you will be ready to fetch your first real exercise.
 
-Write a `Hello World!` function that can greet someone given their name.  The
-function should return the appropriate greeting.
+## Exception messages
 
-For an input of "Alice", the response should be "Hello, Alice!".
+Sometimes it is necessary to raise an exception. When you do this, you should include a meaningful error message to
+indicate what the source of the error is. This makes your code more readable and helps significantly with debugging. Not
+every exercise will require you to raise an exception, but for those that do, the tests will only pass if you include
+a message.
 
-If a name is not given, the response should be "Hello, World!"
+To raise a message with an exception, just write it as an argument to the exception type. For example, instead of
+`raise Exception`, you should write:
 
-## Test-Driven Development
+```python
+raise Exception("Meaningful message indicating the source of the error")
+```
 
-As programmers mature, they eventually want to test their code.
+## Running the tests
 
-Here at Exercism we simulate [Test-Driven
-Development](http://en.wikipedia.org/wiki/Test-driven_development) (TDD), where
-you write your tests before writing any functionality. The simulation comes in
-the form of a pre-written test suite, which will signal that you have solved
-the problem.
+To run the tests, run the appropriate command below ([why they are different](https://github.com/pytest-dev/pytest/issues/1629#issue-161422224)):
 
-It will also provide you with a safety net to explore other solutions without
-breaking the functionality.
+- Python 2.7: `py.test hello_world_test.py`
+- Python 3.4+: `pytest hello_world_test.py`
 
-### A typical TDD workflow on Exercism:
+Alternatively, you can tell Python to run the pytest module (allowing the same command to be used regardless of Python version):
+`python -m pytest hello_world_test.py`
 
-1. Run the test file and pick one test that's failing.
-2. Write some code to fix the test you picked.
-3. Re-run the tests to confirm the test is now passing.
-4. Repeat from step 1.
-5. Submit your solution (`exercism submit /path/to/file`)
+### Common `pytest` options
 
-## Instructions
+- `-v` : enable verbose output
+- `-x` : stop running tests on first failure
+- `--ff` : run failures from previous test before running other test cases
 
-Submissions are encouraged to be general, within reason. Having said that, it's
-also important not to over-engineer a solution.
+For other options, see `python -m pytest -h`
 
-It's important to remember that the goal is to make code as expressive and
-readable as we can. However, solutions to the hello-world exercise will not be
-reviewed by a person, but by rikki- the robot, who will offer an encouraging
-word.
+## Submitting Exercises
 
-### Submitting Exercises
+Note that, when trying to submit an exercise, make sure the solution is in the `$EXERCISM_WORKSPACE/python/hello-world` directory.
 
-Note that, when trying to submit an exercise, make sure the solution is in the `exercism/python/<exerciseName>` directory.
-
-For example, if you're submitting `bob.py` for the Bob exercise, the submit command would be something like `exercism submit <path_to_exercism_dir>/python/bob/bob.py`.
-
+You can find your Exercism workspace by running `exercism debug` and looking for the line that starts with `Workspace`.
 
 For more detailed information about running tests, code style and linting,
-please see the [help page](http://exercism.io/languages/python).
+please see [Running the Tests](http://exercism.io/tracks/python/tests).
 
 ## Source
 
 This is an exercise to introduce users to using Exercism [http://en.wikipedia.org/wiki/%22Hello,_world!%22_program](http://en.wikipedia.org/wiki/%22Hello,_world!%22_program)
 
-## Submitting Incomplete Problems
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+## Submitting Incomplete Solutions
 
+It's possible to submit an incomplete solution so you can see how others have completed the exercise.
