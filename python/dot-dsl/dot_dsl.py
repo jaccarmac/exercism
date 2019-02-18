@@ -24,4 +24,27 @@ class Edge(object):
 
 class Graph(object):
     def __init__(self, data=[]):
-        pass
+        if not isinstance(data, list):
+            raise TypeError('graph is not a list')
+        self.nodes = []
+        self.edges = []
+        self.attrs = {}
+        addMethods = {NODE: self._addNode, EDGE: self._addEdge, ATTR: self._addAttr}
+        for line in data:
+            if len(line) < 2:
+                raise TypeError(f'subgraph has no arguments')
+            try:
+                addMethods[line[0]](*line[1:])
+            except KeyError:
+                raise ValueError(f'unknown subgraph type')
+            except TypeError:
+                raise ValueError(f'bad arguments for subgraph')                
+
+    def _addNode(self, name, attrs):
+        self.nodes.append(Node(name, attrs))
+
+    def _addEdge(self, src, dst, attrs):
+        self.edges.append(Edge(src, dst, attrs))
+
+    def _addAttr(self, key, value):
+        self.attrs[key] = value
