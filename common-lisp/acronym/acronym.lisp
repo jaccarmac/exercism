@@ -6,7 +6,7 @@
 (in-package #:acronym)
 
 (defun acronym (phrase)
-  (format nil "~{~A~}"
+  (format nil "~{~a~}"
           (loop for letter across phrase
              with add-to-acronym = t
              if (and add-to-acronym (both-case-p letter))
