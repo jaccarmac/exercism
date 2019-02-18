@@ -51,40 +51,42 @@ def parse_node(tok, input_iter):
             children.append(parse_node(next(input_iter), input_iter))
             next_tok = next(input_iter)
         else:
-            prop_key, prop_values, next_tok = parse_property(next_tok, input_iter)
+            prop_key = parse_property_key(next_tok, input_iter)
+            prop_values = []
+            while True:
+                next_tok = next(input_iter)
+                prop_values.append(parse_property_value(next_tok, input_iter))
+                next_tok = next(input_iter)
+                if next_tok != '[':
+                    break
             properties[prop_key] = prop_values
     return SgfTree(properties, children)
 
-def parse_property(tok, input_iter):
+def parse_property_key(tok, input_iter):
     key = ''
     next_tok = tok
     while True:
         if next_tok == '[':
-            next_tok = next(input_iter)
-            break
+            if not key.isupper():
+                raise ValueError('lowercase property key')
+            return key
         else:
             key += next_tok
             next_tok = next(input_iter)
-    if not key.isupper():
-        raise ValueError('lowercase property key')
-    values = []
-    current_value = ''
+
+def parse_property_value(tok, input_iter):
+    value = ''
+    next_tok = tok
     while True:
         if next_tok == '\\':
+            value += next(input_iter)
             next_tok = next(input_iter)
-            if next_tok == 't':
-                current_value += ' '
-            else:
-                current_value += next_tok
+        elif next_tok == '\t':
+            value += ' '
             next_tok = next(input_iter)
         elif next_tok == ']':
-            values.append(current_value)
-            current_value = ''
-            if next(input_iter) != '[':
-                break
-            next_tok = next(input_iter)
+            break
         else:
-            current_value += next_tok
+            value += next_tok
             next_tok = next(input_iter)
-    print(key, values)
-    return (key, values, next_tok)
+    return value
