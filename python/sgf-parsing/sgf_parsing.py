@@ -27,3 +27,8 @@ class SgfTree(object):
 
 def parse(input_string):
     pass
+
+# Nodes generally start with "(;" but the naked semicolon is a special case for
+# a single child. Since the whole thing is wrapped in parens we can basically
+# start with a None root node and do the recursive parsing process from
+# there. Then just pull that null node's single child and we have the tree.
