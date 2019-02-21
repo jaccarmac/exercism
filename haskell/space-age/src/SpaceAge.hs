@@ -16,7 +16,7 @@ ageOnEarth :: Float -> Float
 ageOnEarth = (/ earthYear)
 
 ageOn :: Planet -> Float -> Float
-ageOn =  (ageOnEarth .) . convertToEarthTime
+ageOn = (ageOnEarth .) . convertToEarthTime
 
 convertToEarthTime :: Planet -> Float -> Float
 convertToEarthTime Mercury = (/ 0.2408467)
