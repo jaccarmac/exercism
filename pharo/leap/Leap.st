@@ -9,5 +9,6 @@ Class {
 
 { #category : #'leap-year' }
 Leap >> isLeapYear: anInteger [
-	^ (anInteger isDivisibleBy: 400) or: ((anInteger isDivisibleBy: 4) and: (anInteger isDivisibleBy: 100) not)
+	^ (anInteger isDivisibleBy: 400)
+		or: ((anInteger isDivisibleBy: 4) and: (anInteger isDivisibleBy: 100) not)
 ]

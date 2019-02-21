@@ -13,6 +13,6 @@ TwoFer >> who [
 ]
 
 { #category : #'two-fer' }
-TwoFer >> who: aString [ 
-	^ 'One for ', aString, ', one for me.'
+TwoFer >> who: aString [
+	^ 'One for ' , aString , ', one for me.'
 ]

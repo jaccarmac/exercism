@@ -11,13 +11,16 @@ Class {
 }
 
 { #category : #initialization }
-SumOfMultiples class >> with: anInteger [ 
-	^ self withAny: { anInteger }
+SumOfMultiples class >> with: anInteger [
+	^ self withAny: {anInteger}
 ]
 
 { #category : #initialization }
-SumOfMultiples class >> with: anInteger or: anInteger2 [ 
-	^ self withAny: { anInteger . anInteger2 }
+SumOfMultiples class >> with: anInteger or: anInteger2 [
+	^ self
+		withAny:
+			{anInteger.
+			anInteger2}
 ]
 
 { #category : #initialization }
@@ -29,8 +32,8 @@ SumOfMultiples class >> withAny: aCollection [
 ]
 
 { #category : #private }
-SumOfMultiples >> addToNumbers: anInteger [ 
-	numbers add: anInteger 
+SumOfMultiples >> addToNumbers: anInteger [
+	numbers add: anInteger
 ]
 
 { #category : #initialization }
@@ -40,9 +43,11 @@ SumOfMultiples >> initialize [
 ]
 
 { #category : #'sum-of-multiples' }
-SumOfMultiples >> upTo: anInteger [ 
+SumOfMultiples >> upTo: anInteger [
 	| sum |
 	sum := 0.
-	1 to: anInteger - 1 do: [ :i | (numbers anySatisfy: [ :j | i isDivisibleBy: j ]) ifTrue: [ sum := sum + i ] ].
+	1 to: anInteger - 1 do: [ :i | 
+		(numbers anySatisfy: [ :j | i isDivisibleBy: j ])
+			ifTrue: [ sum := sum + i ] ].
 	^ sum
 ]
