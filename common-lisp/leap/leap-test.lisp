@@ -1,4 +1,5 @@
-(ql:quickload "lisp-unit")
+(require 'asdf)
+(require 'lisp-unit)
 #-xlisp-test (load "leap-year")
 
 (defpackage #:leap-test
