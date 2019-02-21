@@ -9,5 +9,5 @@ Class {
 
 { #category : #'hello-world' }
 HelloWorld class >> sayHello [
-	^ 'Hello, World!'.
+	^ 'Hello, World!'
 ]
