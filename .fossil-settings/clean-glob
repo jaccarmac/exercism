@@ -2,4 +2,3 @@
 *.pyc
 */target/
 */.pytest_cache/
-pharo/pharo-image
