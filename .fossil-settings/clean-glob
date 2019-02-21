@@ -4,3 +4,4 @@
 */target/
 */.pytest_cache/
 */.stack-work
+*.cabal
