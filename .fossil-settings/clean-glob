@@ -1,4 +1,5 @@
 *.lein-failures
+*.lein-repl-history
 *.pyc
 */target/
 */.pytest_cache/

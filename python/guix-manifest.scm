@@ -1,2 +1,2 @@
 (specifications->manifest
-  '("python" "python-pytest"))
+ '("python" "python-pytest"))
