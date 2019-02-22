@@ -9,13 +9,18 @@ const upperAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 func Hey(remark string) string {
 	remarkStripped := strings.TrimSpace(remark)
 	remarkRunes := []rune(remarkStripped)
-	switch {
-	case remarkStripped == "":
+	if len(remarkRunes) == 0 {
 		return "Fine. Be that way!"
-	case remarkStripped == strings.ToUpper(remarkStripped) &&
-		strings.ContainsAny(remarkStripped, upperAlphabet):
+	}
+	yellingp := remarkStripped == strings.ToUpper(remarkStripped) &&
+		strings.ContainsAny(remarkStripped, upperAlphabet)
+	questionp := remarkRunes[len(remarkRunes)-1] == '?'
+	switch {
+	case yellingp && questionp:
+		return "Calm down, I know what I'm doing!"
+	case yellingp:
 		return "Whoa, chill out!"
-	case remarkRunes[len(remarkRunes)-1] == '?':
+	case questionp:
 		return "Sure."
 	}
 	return "Whatever."
