@@ -61,7 +61,7 @@ func skipSpaceState(state *phraseState) stateFn {
 
 func skipUntilSpaceState(state *phraseState) stateFn {
 	thisRune := state.phrase[0]
-	if !unicode.IsLetter(thisRune) {
+	if thisRune == ' ' || thisRune == '-' {
 		return skipSpaceState
 	}
 	state.phrase = state.phrase[1:]
