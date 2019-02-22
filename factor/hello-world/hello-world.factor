@@ -1,7 +1,3 @@
-! USEd vocabularies go here
-USING: ;
-! the vocab name goes here
-IN: hello-world
+IN: exercism.factor.hello-world
 
-! your implementation goes here
-! : say-hello ( -- ) ;
+: say-hello ( -- h ) "Hello, World!" ;
