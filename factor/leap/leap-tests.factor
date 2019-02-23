@@ -1,5 +1,5 @@
-USING: io leap tools.test ;
-IN: leap.tests
+USING: io exercism.leap tools.test ;
+IN: exercism.leap.tests
 
 "Leap year:" print
 
