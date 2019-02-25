@@ -4,7 +4,7 @@
   (:export #:word-count))
 (in-package #:phrase)
 
-(defun inc-word-count (word words)
+(defun inc-word-count (words word)
   (let ((new-words (remove word words :key #'car :test #'string=))
         (new-count (1+ (or (cdr (assoc word words :test #'string=)) 0))))
     (acons word new-count new-words)))
@@ -22,7 +22,4 @@
      finally (return (if word-ready-p (cons word words) words))))
 
 (defun word-count (phrase)
-  (loop for word in (words-in phrase)
-     with words
-     do (setf words (inc-word-count word words))
-     finally (return words)))
+  (reduce #'inc-word-count (words-in phrase) :initial-value nil))
