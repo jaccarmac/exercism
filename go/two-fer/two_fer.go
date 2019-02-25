@@ -3,8 +3,7 @@ package twofer
 
 // ShareWith generates a phrase with an optional name spliced in.
 // To use a default instead of a name, pass the empty string.
-func ShareWith(optionalName string) string {
-	name := optionalName
+func ShareWith(name string) string {
 	if name == "" {
 		name = "you"
 	}
