@@ -1,6 +1,6 @@
 module Bob (responseFor) where
 
-import           Data.Text (Text, empty, last, pack, strip, toLower, toUpper)
+import           Data.Char (isLetter, isSpace, toUpper)
 
 responseFor :: String -> String
 responseFor = let
@@ -10,13 +10,16 @@ responseFor = let
     | isShouting t = "Whoa, chill out!"
     | isQuestion t = "Sure."
     | otherwise = "Whatever."
-  in respond . strip . pack
+  in respond . strip
 
-isShouting :: Text -> Bool
-isShouting t = t == toUpper t && t /= toLower t
+isShouting :: String -> Bool
+isShouting s = any isLetter s && all (\c -> c == toUpper c) s
 
-isQuestion :: Text -> Bool
-isQuestion = (== '?') . Data.Text.last
+isQuestion :: String -> Bool
+isQuestion = (== '?') . last
 
-isSilence :: Text -> Bool
-isSilence = (== empty)
+isSilence :: String -> Bool
+isSilence = (== 0) . length
+
+strip :: String -> String
+strip = filter (not . isSpace)
