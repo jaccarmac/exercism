@@ -8,4 +8,4 @@ collatz n = find ((|| n == 1) . (>0))
   $ toInteger
   $ length
   $ takeWhile (>1)
-  $ iterate (\i -> if even i then i `div` 2 else 3 * i + 1) n
+  $ iterate (\i -> if even i then i `quot` 2 else 3 * i + 1) n
