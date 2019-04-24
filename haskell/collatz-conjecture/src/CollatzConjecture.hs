@@ -1,10 +1,7 @@
 module CollatzConjecture (collatz) where
 
-import           Data.Foldable (find)
-
 collatz :: Integer -> Maybe Integer
-collatz n = find ((|| n == 1) . (>0))
-  $ Just
+collatz n = (\i -> if n == 1 && i == 0 then Just 0 else if i == 0 then Nothing else Just i)
   $ toInteger
   $ length
   $ takeWhile (>1)
