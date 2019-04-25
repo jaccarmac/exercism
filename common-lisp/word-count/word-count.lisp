@@ -5,9 +5,16 @@
 (in-package #:phrase)
 
 (defun inc-word-count (words word)
-  (let ((new-words (remove word words :key #'car :test #'string=))
-        (new-count (1+ (or (cdr (assoc word words :test #'string=)) 0))))
-    (acons word new-count new-words)))
+  (let ((new-count (1+ (or (cdr (assoc word words :test #'string=)) 0))))
+    (acons word new-count words)))
+
+(defun clean-word-counts (counts)
+  (reduce (lambda (new-counts count)
+            (if (assoc (car count) new-counts :test #'string=)
+                new-counts
+                (cons count new-counts)))
+          counts
+          :initial-value nil))
 
 (defun words-in (phrase)
   (loop for letter across phrase
@@ -22,4 +29,4 @@
      finally (return (if word-ready-p (cons word words) words))))
 
 (defun word-count (phrase)
-  (reduce #'inc-word-count (words-in phrase) :initial-value nil))
+  (clean-word-counts (reduce #'inc-word-count (words-in phrase) :initial-value nil)))
