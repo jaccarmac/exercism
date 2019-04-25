@@ -3,4 +3,4 @@
 *.pyc
 */target/
 */.pytest_cache/
-*/.stack-work
+*/.stack-work/
