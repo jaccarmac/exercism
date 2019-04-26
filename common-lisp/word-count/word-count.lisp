@@ -5,16 +5,11 @@
 (in-package #:phrase)
 
 (defun words-in (phrase)
-  (loop for letter across phrase
-     with word = ""
-     for word-ready-p = (not (zerop (length word)))
-     if (not (alphanumericp letter))
-       when word-ready-p
-       collect word into words
-       and do (setf word "")
-       end
-     else do (setf word (concatenate 'string word (list (char-downcase letter))))
-     finally (return (if word-ready-p (cons word words) words))))
+  (loop for beg = (position-if #'alphanumericp phrase)
+     then (position-if #'alphanumericp phrase :start (1+ end))
+     for end = (and beg (position-if-not #'alphanumericp phrase :start beg))
+     when beg collect (string-downcase (subseq phrase beg end))
+     while end))
 
 (defun inc-word-counts (counts word)
   (let ((new-count (1+ (or (cdr (assoc word counts :test #'string=)) 0))))
