@@ -7,21 +7,21 @@
 
 (defun response-for (sentence)
   (let ((sentence (string-trim sentence)))
-    (cond ((saying-nothing-p sentence) "Fine. Be that way!")
-          ((and (yellingp sentence) (askingp sentence))
+    (cond ((bob--saying-nothing-p sentence) "Fine. Be that way!")
+          ((and (bob--yellingp sentence) (bob--askingp sentence))
            "Calm down, I know what I'm doing!")
-          ((yellingp sentence) "Whoa, chill out!")
-          ((askingp sentence) "Sure.")
+          ((bob--yellingp sentence) "Whoa, chill out!")
+          ((bob--askingp sentence) "Sure.")
           (t "Whatever."))))
 
-(defun saying-nothing-p (sentence)
+(defun bob--saying-nothing-p (sentence)
   (= (length sentence) 0))
 
-(defun yellingp (sentence)
+(defun bob--yellingp (sentence)
   (and (string-match-p "[[:alpha:]]" sentence)
        (string-equal sentence (upcase sentence))))
 
-(defun askingp (sentence)
+(defun bob--askingp (sentence)
   (string-suffix-p "?" sentence))
 
 (provide 'bob)
