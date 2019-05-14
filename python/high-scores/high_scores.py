@@ -9,6 +9,4 @@ def personal_best(scores):
 
 
 def personal_top_three(scores):
-    def top_three_reducer(top, score):
-        return sorted(top + [score], reverse=True)[:3]
-    return reduce(top_three_reducer, scores, [])
+    return reduce(lambda t, s: sorted(t + [s], reverse=True)[:3], scores, [])
