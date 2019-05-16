@@ -68,7 +68,7 @@ class SortedCategory(Category):
 
 class LITTLE_STRAIGHT(SortedCategory):
     def satisfies(self):
-        return sorted(self.dice) == [1, 2, 3, 4, 5]
+        return self.dice == [1, 2, 3, 4, 5]
 
     def score(self):
         return 30
