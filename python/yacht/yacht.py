@@ -23,7 +23,7 @@ def NumbersCategory(number):
             return True
 
         def score(self):
-            return sum([x for x in self.dice if x == number])
+            return sum(x for x in self.dice if x == number)
 
     return NumbersCategory
 
@@ -34,41 +34,41 @@ FOURS = NumbersCategory(4)
 FIVES= NumbersCategory(5)
 SIXES = NumbersCategory(6)
 
+class FULL_HOUSE(Category):
+    def satisfies(self):
+        for die in self.dice:
+            if len([x for x in self.dice if x == die]) not in (2, 3):
+                return False
+        return True
+
+    def score(self):
+        return sum(self.dice)
+
+class FOUR_OF_A_KIND(Category):
+    def __init__(self, dice):
+        super(FOUR_OF_A_KIND, self).__init__(dice)
+        for die in self.dice:
+            if len([x for x in self.dice if x == die]) in (4, 5):
+                self.die = die
+                return
+        self.die = None
+
+    def satisfies(self):
+        if self.die:
+            return True
+        return False
+
+    def score(self):
+        return 4 * self.die
+
 class SortedCategory(Category):
     def __init__(self, dice):
         super(SortedCategory, self).__init__(dice)
         self.dice.sort()
 
-class FULL_HOUSE(SortedCategory):
-    def satisfies(self):
-        first_two = set(self.dice[:2])
-        last_three = set(self.dice[2:])
-        first_three = set(self.dice[:3])
-        last_two = set(self.dice[3:])
-        return (first_two != last_three
-                and ((len(first_two) == 1 and len(last_three) == 1)
-                     or (len(first_three) == 1 and len(last_two) == 1)))
-
-    def score(self):
-        return sum(self.dice)
-
-class FOUR_OF_A_KIND(SortedCategory):
-    def __init__(self, dice):
-        super(FOUR_OF_A_KIND, self).__init__(dice)
-        self.first_four = set(self.dice[:4])
-        self.last_four = set(self.dice[1:])
-
-    def satisfies(self):
-        return len(self.last_four) == 1 or len(self.first_four) == 1
-
-    def score(self):
-        return 4 * sum(
-            self.first_four if len(self.first_four) == 1 else self.last_four
-        )
-
 class LITTLE_STRAIGHT(SortedCategory):
     def satisfies(self):
-        return self.dice == [1, 2, 3, 4, 5]
+        return sorted(self.dice) == [1, 2, 3, 4, 5]
 
     def score(self):
         return 30
