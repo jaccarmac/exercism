@@ -8,10 +8,9 @@
 (defun verse (bottles)
   (let* ((bottles-format "~[no more~:;~:*~a~] bottle~:p of beer")
          (current-bottles (format nil bottles-format bottles))
-         (take-one (format nil "~[Go to the store and buy some more~;~
-                                  Take it down and pass it around~:;~
-                                  Take one down and pass it around~]"
-                           bottles))
+         (take-one (format nil "~[Go to the store and buy some more~:;~
+                                  Take ~:[one~;it~] down and pass it around~]"
+                           bottles (= bottles 1)))
          (next-bottles (format nil bottles-format (mod (1- bottles) 100))))
     (format nil "~@(~a~) on the wall, ~:*~a.~%~
                  ~a, ~a on the wall.~%"
