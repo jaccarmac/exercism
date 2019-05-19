@@ -6,15 +6,14 @@
 (in-package #:beer)
 
 (defun verse (bottles)
-  (let* ((bottles-format "~[no more~:;~:*~a~] bottle~:p of beer")
-         (current-bottles (format nil bottles-format bottles))
-         (take-one (format nil "~[Go to the store and buy some more~:;~
-                                  Take ~:[one~;it~] down and pass it around~]"
-                           bottles (= bottles 1)))
-         (next-bottles (format nil bottles-format (mod (1- bottles) 100))))
-    (format nil "~@(~a~) on the wall, ~:*~a.~%~
-                 ~a, ~a on the wall.~%"
-            current-bottles take-one next-bottles)))
+  (let ((bottles-format "~[no more~:;~:*~a~] bottle~:p of beer")
+        (take-one-format "~[Go to the store and buy some more~:;~
+                            Take ~:[one~;it~] down and pass it around~]"))
+    (format nil "~@(~?~) on the wall, ~2:*~?.~%~
+                 ~?, ~? on the wall.~%"
+            bottles-format `(,bottles)
+            take-one-format `(,bottles ,(= bottles 1))
+            bottles-format `(,(mod (1- bottles) 100)))))
 
 (defun sing (from &optional (to 0))
   (format nil "~{~a~%~}"
