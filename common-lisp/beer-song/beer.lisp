@@ -8,12 +8,12 @@
 (defun verse (bottles)
   (let ((bottles-format "~[no more~:;~:*~a~] bottle~:p of beer")
         (take-one-format "~[Go to the store and buy some more~:;~
-                            Take ~:[one~;it~] down and pass it around~]"))
-    (format nil "~@(~?~) on the wall, ~2:*~?.~%~
-                 ~?, ~? on the wall.~%"
-            bottles-format `(,bottles)
-            take-one-format `(,bottles ,(= bottles 1))
-            bottles-format `(,(mod (1- bottles) 100)))))
+                            Take ~:*~[~;it~:;one~] down and pass it around~]"))
+    (format nil "~@(~@?~) on the wall, ~2:*~@?.~%~
+                 ~@?, ~@? on the wall.~%"
+            bottles-format bottles
+            take-one-format bottles
+            bottles-format (mod (1- bottles) 100))))
 
 (defun sing (from &optional (to 0))
   (format nil "~{~a~%~}"
