@@ -5,13 +5,10 @@
 
 (in-package #:anagram)
 
-(defun anagram-p (word1 word2)
-  )
-
 (defun anagrams-for (word corpus)
-  (let ((word (string-downcase word))
-        (corpus (mapc #'string-downcase corpus)))
-    (loop for cword in corpus
-       when (and (not (string= cword word))
-                 (anagram-p word cword))
-       collect cword)))
+  (loop for cword in corpus
+     when (let ((cword (coerce (string-downcase cword) 'list))
+                (word (coerce (string-downcase word) 'list)))
+            (and (not (equal cword word))
+                 (equal (sort cword #'char-lessp) (sort word #'char-lessp))))
+     collect cword))
