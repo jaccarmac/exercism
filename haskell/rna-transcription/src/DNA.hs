@@ -1,8 +1,7 @@
 module DNA (toRNA) where
 
 toRNA :: String -> Either Char String
-toRNA ""     = Right ""
-toRNA (n:ns) = complement n >>= flip fmap (toRNA ns) . (:)
+toRNA = mapM complement
 
 complement :: Char -> Either Char Char
 complement 'G' = Right 'C'
