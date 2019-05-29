@@ -6,11 +6,14 @@ import           Data.Map      (Map, fromList, insertWith)
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts = foldM countNucleotide $ fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
+nucleotideCounts = foldM (flip countNucleotide) emptyCount
 
-countNucleotide :: Map Nucleotide Int -> Char -> Either String (Map Nucleotide Int)
-countNucleotide m 'A' = Right $ insertWith (+) A 1 m
-countNucleotide m 'C' = Right $ insertWith (+) C 1 m
-countNucleotide m 'G' = Right $ insertWith (+) G 1 m
-countNucleotide m 'T' = Right $ insertWith (+) T 1 m
-countNucleotide m c   = Left [c]
+emptyCount :: Map Nucleotide Int
+emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
+
+countNucleotide :: Char -> Map Nucleotide Int -> Either String (Map Nucleotide Int)
+countNucleotide 'A' = Right . insertWith (+) A 1
+countNucleotide 'C' = Right . insertWith (+) C 1
+countNucleotide 'G' = Right . insertWith (+) G 1
+countNucleotide 'T' = Right . insertWith (+) T 1
+countNucleotide c   = const $ Left [c]
