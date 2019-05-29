@@ -6,13 +6,13 @@ import           Data.Map      (Map, fromList, insertWith)
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts = foldM (\m -> fmap (`countNucleotide` m) . nucleotideFor) emptyCount
+nucleotideCounts = foldM ((. nucleotideFor) . fmap . flip countNucleotide) emptyCount
 
 emptyCount :: Map Nucleotide Int
 emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
 
 countNucleotide :: Nucleotide -> Map Nucleotide Int -> Map Nucleotide Int
-countNucleotide n = insertWith (+) n 1
+countNucleotide = flip (insertWith (+)) 1
 
 nucleotideFor :: Char -> Either String Nucleotide
 nucleotideFor 'A' = Right A
