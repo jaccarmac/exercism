@@ -1,16 +1,13 @@
 module DNA (nucleotideCounts, Nucleotide(..)) where
 
-import           Data.Map        (Map, fromList, insertWith)
-import           Data.Validation (Validation (..))
+import           Control.Applicative (liftA2)
+import           Data.Map            (Map, fromList, insertWith)
+import           Data.Validation     (Validation (..))
 
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 nucleotideCounts :: String -> Validation String (Map Nucleotide Int)
-nucleotideCounts = foldl innerFunc $ pure emptyCount
-
-innerFunc :: Validation String (Map Nucleotide Int) -> Char -> Validation String (Map Nucleotide Int)
-innerFunc (Failure c) = const $ Failure c
-innerFunc (Success m) = fmap (`countNucleotide` m) . nucleotideFor
+nucleotideCounts = foldl (flip $ liftA2 countNucleotide . nucleotideFor) $ pure emptyCount
 
 emptyCount :: Map Nucleotide Int
 emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
