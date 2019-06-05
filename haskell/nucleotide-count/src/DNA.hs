@@ -1,14 +1,17 @@
 module DNA (nucleotideCounts, Nucleotide(..)) where
 
-import           Control.Arrow (left)
-import           Control.Monad (foldM, liftM2)
+import           Control.Monad (foldM)
 import           Data.Map      (Map, fromList, insertWith)
 
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts = liftM2 left const $
-  foldM (\m -> fmap (`countNucleotide` m) . nucleotideFor) emptyCount
+nucleotideCounts dna = case (
+  foldM
+    (\m -> fmap (`countNucleotide` m) . nucleotideFor) emptyCount dna
+  ) of
+  Left _       -> Left dna
+  Right counts -> Right counts
 
 emptyCount :: Map Nucleotide Int
 emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
