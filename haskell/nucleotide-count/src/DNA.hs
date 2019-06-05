@@ -1,17 +1,16 @@
 module DNA (nucleotideCounts, Nucleotide(..)) where
 
-import           Control.Applicative (liftA2)
-import           Control.Arrow       (left)
-import           Data.Map            (Map, fromList, insertWith)
+import           Data.Map        (Map, fromList, insertWith)
+import           Data.Validation (Validation (..))
 
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
-nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts = liftA2 left const $ foldl innerFunc $ Right emptyCount
+nucleotideCounts :: String -> Validation String (Map Nucleotide Int)
+nucleotideCounts = foldl innerFunc $ Success emptyCount
 
-innerFunc :: Either String (Map Nucleotide Int) -> Char -> Either String (Map Nucleotide Int)
-innerFunc (Left c)  = const $ Left c
-innerFunc (Right m) = fmap (`countNucleotide` m) . nucleotideFor
+innerFunc :: Validation String (Map Nucleotide Int) -> Char -> Validation String (Map Nucleotide Int)
+innerFunc (Failure c) = const $ Failure c
+innerFunc (Success m) = fmap (`countNucleotide` m) . nucleotideFor
 
 emptyCount :: Map Nucleotide Int
 emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
@@ -19,9 +18,9 @@ emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
 countNucleotide :: Nucleotide -> Map Nucleotide Int -> Map Nucleotide Int
 countNucleotide n = insertWith (+) n 1
 
-nucleotideFor :: Char -> Either String Nucleotide
-nucleotideFor 'A' = Right A
-nucleotideFor 'C' = Right C
-nucleotideFor 'G' = Right G
-nucleotideFor 'T' = Right T
-nucleotideFor c   = Left [c]
+nucleotideFor :: Char -> Validation String Nucleotide
+nucleotideFor 'A' = Success A
+nucleotideFor 'C' = Success C
+nucleotideFor 'G' = Success G
+nucleotideFor 'T' = Success T
+nucleotideFor c   = Failure [c]
