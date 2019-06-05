@@ -2,7 +2,6 @@
 
 import           Data.Either       (isLeft)
 import           Data.Map          (fromList)
-import           Data.Validation   (toEither)
 import           Test.Hspec        (Spec, describe, it, shouldBe, shouldSatisfy)
 import           Test.Hspec.Runner (configFastFail, defaultConfig, hspecWith)
 
@@ -19,32 +18,32 @@ specs = do
           describe "nucleotideCounts" $ do
 
             it "empty dna strand has no nucleotides" $
-              toEither (nucleotideCounts "") `matchesMap` [ (A, 0)
+              nucleotideCounts "" `matchesMap` [ (A, 0)
                                                , (C, 0)
                                                , (G, 0)
                                                , (T, 0) ]
 
             it "can count one nucleotide in single-character input" $
-              toEither (nucleotideCounts "G") `matchesMap` [ (A, 0)
+              nucleotideCounts "G" `matchesMap` [ (A, 0)
                                                 , (C, 0)
                                                 , (G, 1)
                                                 , (T, 0) ]
 
             it "repetitive-sequence-has-only-guanosine" $
-              toEither (nucleotideCounts "GGGGGGGG") `matchesMap` [ (A, 0)
+              nucleotideCounts "GGGGGGGG" `matchesMap` [ (A, 0)
                                                        , (C, 0)
                                                        , (G, 8)
                                                        , (T, 0) ]
 
             it "counts all nucleotides" $
-              toEither (nucleotideCounts "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC")
+              nucleotideCounts "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
               `matchesMap` [ (A, 20)
                            , (C, 12)
                            , (G, 17)
                            , (T, 21) ]
 
             it "validates strand" $
-              toEither (nucleotideCounts "AGXXACT") `shouldSatisfy` isLeft
+              nucleotideCounts "AGXXACT" `shouldSatisfy` isLeft
 
             it "returns invalid characters" $
-              toEither (nucleotideCounts "AGXXACT") `shouldBe` Left "XX"
+              nucleotideCounts "AGXXACT" `shouldBe` Left "XX"

@@ -2,12 +2,13 @@ module DNA (nucleotideCounts, Nucleotide(..)) where
 
 import           Control.Applicative (liftA2)
 import           Data.Map            (Map, fromList, insertWith)
-import           Data.Validation     (Validation (..))
+import           Data.Validation     (Validation (..), toEither)
 
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
-nucleotideCounts :: String -> Validation String (Map Nucleotide Int)
-nucleotideCounts = foldl (flip $ liftA2 countNucleotide . nucleotideFor) $ pure emptyCount
+nucleotideCounts :: String -> Either String (Map Nucleotide Int)
+nucleotideCounts = toEither .
+  foldl (flip $ liftA2 countNucleotide . nucleotideFor) (pure emptyCount)
 
 emptyCount :: Map Nucleotide Int
 emptyCount = fromList [(A, 0), (C, 0), (G, 0), (T, 0)]
