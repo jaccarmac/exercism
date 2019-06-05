@@ -6,7 +6,7 @@ import           Data.Validation (Validation (..))
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 nucleotideCounts :: String -> Validation String (Map Nucleotide Int)
-nucleotideCounts = foldl innerFunc $ Success emptyCount
+nucleotideCounts = foldl innerFunc $ pure emptyCount
 
 innerFunc :: Validation String (Map Nucleotide Int) -> Char -> Validation String (Map Nucleotide Int)
 innerFunc (Failure c) = const $ Failure c
