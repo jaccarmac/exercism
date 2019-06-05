@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6f340ffae4535634269b5c44a328776af634e79b5a03e544b1e2bedb357475bd
+-- hash: 870b0792bf4ef47fa31b8ad1debbf3baa6ba635ac44db85bc1a00309bc1c46ba
 
 name:           nucleotide-count
 version:        1.3.0.7
@@ -21,6 +21,7 @@ library
   build-depends:
       base
     , containers
+    , validation
   default-language: Haskell2010
 
 test-suite test
