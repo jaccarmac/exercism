@@ -169,8 +169,10 @@ concurrent threads. Can be used for progress displays etc.")
    (native-inputs
     `(("ghc-tasty" ,ghc-tasty)
       ("ghc-tasty-hunit" ,ghc-tasty-hunit)))
-   (home-page "https://github.com/minad/wl-pprint-annotated#readme")
-   (synopsis "Pretty printer with annotation support")
+   (home-page
+    "https://github.com/minad/wl-pprint-annotated#readme")
+   (synopsis
+    "Pretty printer with annotation support")
    (description
     "Wadler/Leijen pretty printer with support for annotations and modernized
 API. Annotations are useful for coloring. See wl-pprint-console.")
