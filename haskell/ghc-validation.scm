@@ -155,13 +155,16 @@ concurrent threads. Can be used for progress displays etc.")
   (package
    (name "ghc-wl-pprint-annotated")
    (version "0.1.0.1")
-   (source (origin
-            (method url-fetch)
-            (uri (string-append "https://hackage.haskell.org/package/"
-                                "wl-pprint-annotated/wl-pprint-annotated-"
-                                version ".tar.gz"))
-            (sha256
-             (base32 "1br7qyf27iza213inwhf9bm2k6in0zbmfw6w4clqlc9f9cj2nrkb"))))
+   (source
+    (origin
+     (method url-fetch)
+     (uri (string-append
+           "https://hackage.haskell.org/package/wl-pprint-annotated/wl-pprint-annotated-"
+           version
+           ".tar.gz"))
+     (sha256
+      (base32
+       "1br7qyf27iza213inwhf9bm2k6in0zbmfw6w4clqlc9f9cj2nrkb"))))
    (build-system haskell-build-system)
    (native-inputs
     `(("ghc-tasty" ,ghc-tasty)
