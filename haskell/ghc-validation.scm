@@ -106,13 +106,16 @@ To get started quickly, see the examples:
   (package
    (name "ghc-concurrent-output")
    (version "1.10.10")
-   (source (origin
-            (method url-fetch)
-            (uri (string-append "https://hackage.haskell.org/package/"
-                                "concurrent-output/concurrent-output-"
-                                version ".tar.gz"))
-            (sha256
-             (base32 "1wnjxnwbc3l853kiiijagzjyb6fmhz3lmkwls24plbximl1qrr22"))))
+   (source
+    (origin
+     (method url-fetch)
+     (uri (string-append
+           "https://hackage.haskell.org/package/concurrent-output/concurrent-output-"
+           version
+           ".tar.gz"))
+     (sha256
+      (base32
+       "1wnjxnwbc3l853kiiijagzjyb6fmhz3lmkwls24plbximl1qrr22"))))
    (build-system haskell-build-system)
    (inputs
     `(("ghc-async" ,ghc-async)
@@ -121,7 +124,8 @@ To get started quickly, see the examples:
       ("ghc-ansi-terminal" ,ghc-ansi-terminal-newer)
       ("ghc-terminal-size" ,ghc-terminal-size)))
    (home-page "https://hackage.haskell.org/package/concurrent-output")
-   (synopsis "Ungarble output from several threads or commands")
+   (synopsis
+    "Ungarble output from several threads or commands")
    (description
     "Lets multiple threads and external processes concurrently output to the
 console, without it getting all garbled up.
