@@ -1,2 +1,4 @@
-(specifications->manifest
- '("ghc" "ghc-hspec"))
+(load "ghc-validation.scm")
+
+(packages->manifest
+ `(,ghc ,ghc-hspec ,ghc-validation))
