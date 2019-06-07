@@ -9,24 +9,27 @@
   (package
    (name "ghc-validation")
    (version "1.1")
-   (source (origin
-            (method url-fetch)
-            (uri (string-append "https://hackage.haskell.org/package/"
-                                "validation/validation-"
-                                version ".tar.gz"))
-            (sha256
-             (base32 "1acj7mh3581ks405xswxw6667z7y1y0slisg6jvp6chc191ji9l5"))))
+   (source
+    (origin
+     (method url-fetch)
+     (uri (string-append
+           "https://hackage.haskell.org/package/validation/validation-"
+           version
+           ".tar.gz"))
+     (sha256
+      (base32
+       "1acj7mh3581ks405xswxw6667z7y1y0slisg6jvp6chc191ji9l5"))))
    (build-system haskell-build-system)
    (arguments
     `(#:phases
       (modify-phases %standard-phases
-                     (add-after 'unpack 'add-setup-script
-                                (lambda _
-                                  ;; The usual "Setup.hs" script is missing from the source.
-                                  (with-output-to-file "Setup.hs"
-                                    (lambda ()
-                                      (format #t "import Distribution.Simple~%")
-                                      (format #t "main = defaultMain~%"))))))))
+        (add-after 'unpack 'add-setup-script
+          (lambda _
+            ;; The usual "Setup.hs" script is missing from the source.
+            (with-output-to-file "Setup.hs"
+              (lambda ()
+                (format #t "import Distribution.Simple~%")
+                (format #t "main = defaultMain~%"))))))))
    (inputs
     `(("ghc-semigroups" ,ghc-semigroups)
       ("ghc-semigroupoids" ,ghc-semigroupoids)
@@ -36,7 +39,8 @@
     `(("ghc-hedgehog" ,ghc-hedgehog)
       ("ghc-hunit" ,ghc-hunit)))
    (home-page "https://github.com/qfpl/validation")
-   (synopsis "A data-type like Either but with an accumulating Applicative")
+   (synopsis
+    "A data-type like Either but with an accumulating Applicative")
    (description
     "A data-type like Either but with differing properties and type-class
 instances.
