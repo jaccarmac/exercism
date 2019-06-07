@@ -177,3 +177,5 @@ concurrent threads. Can be used for progress displays etc.")
     "Wadler/Leijen pretty printer with support for annotations and modernized
 API. Annotations are useful for coloring. See wl-pprint-console.")
    (license license:bsd-3)))
+
+ghc-validation
