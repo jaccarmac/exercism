@@ -123,7 +123,8 @@ To get started quickly, see the examples:
       ("ghc-exceptions" ,ghc-exceptions)
       ("ghc-ansi-terminal" ,ghc-ansi-terminal-newer)
       ("ghc-terminal-size" ,ghc-terminal-size)))
-   (home-page "https://hackage.haskell.org/package/concurrent-output")
+   (home-page
+    "https://hackage.haskell.org/package/concurrent-output")
    (synopsis
     "Ungarble output from several threads or commands")
    (description
