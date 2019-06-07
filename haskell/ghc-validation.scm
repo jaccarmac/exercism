@@ -62,13 +62,16 @@ functor that is not a monad.\"")
   (package
    (name "ghc-hedgehog")
    (version "0.6.1")
-   (source (origin
-            (method url-fetch)
-            (uri (string-append "https://hackage.haskell.org/package/"
-                                "hedgehog/hedgehog-"
-                                version ".tar.gz"))
-            (sha256
-             (base32 "0xz10ycdm5vk9nrcym1fi83k19frfwqz18bz8bnpzwvaj0j41yfj"))))
+   (source
+    (origin
+     (method url-fetch)
+     (uri (string-append
+           "https://hackage.haskell.org/package/hedgehog/hedgehog-"
+           version
+           ".tar.gz"))
+     (sha256
+      (base32
+       "0xz10ycdm5vk9nrcym1fi83k19frfwqz18bz8bnpzwvaj0j41yfj"))))
    (build-system haskell-build-system)
    (inputs
     `(("ghc-ansi-terminal" ,ghc-ansi-terminal)
@@ -86,7 +89,8 @@ functor that is not a monad.\"")
       ("ghc-stm" ,ghc-stm)
       ("ghc-th-lift" ,ghc-th-lift)
       ("ghc-transformers-base" ,ghc-transformers-base)
-      ("ghc-wl-pprint-annotated" ,ghc-wl-pprint-annotated)))
+      ("ghc-wl-pprint-annotated"
+       ,ghc-wl-pprint-annotated)))
    (home-page "https://hedgehog.qa")
    (synopsis "Hedgehog will eat all your bugs.")
    (description
