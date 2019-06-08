@@ -1,7 +1,10 @@
 module SumOfMultiples (sumOfMultiples) where
 
 sumOfMultiples :: [Integer] -> Integer -> Integer
-sumOfMultiples factors limit = sum $ filter (\x -> any (x `isMultipleOf`) factors) [1..limit-1]
+sumOfMultiples factors limit = sum $ filter (`isMultipleOfAny` factors) [1..limit-1]
+
+isMultipleOfAny :: Integer -> [Integer] -> Bool
+isMultipleOfAny = any . isMultipleOf
 
 isMultipleOf :: Integer -> Integer -> Bool
 isMultipleOf _ 0 = False
