@@ -1,7 +1,6 @@
 module Grains (square, total) where
 
-import           Control.Applicative (liftA2)
-import           Data.Maybe          (fromMaybe)
+import           Data.Maybe (fromMaybe)
 
 square :: Integer -> Maybe Integer
 square n | n < 1 = Nothing
@@ -9,4 +8,4 @@ square n | n < 1 = Nothing
          | otherwise = pure $ 2 ^ (n - 1)
 
 total :: Integer
-total = fromMaybe 0 $ foldl (liftA2 (+)) (Just 0) $ map square [1..64]
+total = fromMaybe 0 $ fmap sum $ sequence $ map square [1..64]
