@@ -8,4 +8,4 @@ square n | n < 1 = Nothing
          | otherwise = pure $ 2 ^ (n - 1)
 
 total :: Integer
-total = fromMaybe 0 $ fmap sum $ sequence $ map square [1..64]
+total = fromMaybe 0 $ sum <$> traverse square [1..64]
