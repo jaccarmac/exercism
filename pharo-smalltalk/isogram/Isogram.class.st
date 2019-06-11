@@ -11,5 +11,8 @@ Class {
 
 { #category : #strings }
 Isogram >> isIsogramPhrase: aString [
-	^ aString onlyLetters asLowercase asSet size = aString onlyLetters asLowercase size
+	| onlyLetters |
+	onlyLetters := aString asLowercase
+		reject: [ :c | c == Character space or: c == $- ].
+	^ onlyLetters asSet size = onlyLetters size
 ]
