@@ -1,5 +1,4 @@
-(ns rna-transcription
-  (:require [clojure.set :refer [union]]))
+(ns rna-transcription)
 
 (def complement
   {\G \C
