@@ -7,8 +7,5 @@
    \C \G})
 
 (defn to-rna [dna]
-  (apply str (reduce #(if-let [n (complement %2)]
-                        (conj %1 n)
-                        (throw (AssertionError. "Bad nucleotide.")))
-                     []
-                     dna)))
+  (doto (apply str (map complement dna))
+        (#(assert (= (count %) (count dna)) "Bad nucleotide."))))
