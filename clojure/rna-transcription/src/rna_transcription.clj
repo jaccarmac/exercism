@@ -7,4 +7,6 @@
    \C \G})
 
 (defn to-rna [dna]
-  (apply str (map #(doto (complement %) (assert "Bad nucleotide.")) dna)))
+  (->> dna
+       (map #(doto (complement %) (assert "Bad nucleotide.")))
+       (apply str)))
