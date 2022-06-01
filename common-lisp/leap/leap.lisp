@@ -1,7 +1,7 @@
-(defpackage #:leap
-  (:use #:common-lisp)
-  (:export #:leap-year-p))
-(in-package #:leap)
+(defpackage :leap
+  (:use :cl)
+  (:export :leap-year-p))
+(in-package :leap)
 
 (defun leap-year-p (year)
   (flet ((year-div-by (div) (zerop (mod year div))))

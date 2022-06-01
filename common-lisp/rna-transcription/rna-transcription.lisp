@@ -1,8 +1,7 @@
-(in-package #:cl-user)
-(defpackage #:dna
-  (:use #:cl)
-  (:export #:to-rna))
-(in-package #:dna)
+(defpackage :rna-transcription
+  (:use :cl)
+  (:export :to-rna))
+(in-package :rna-transcription)
 
 (defparameter *dna-to-rna-nucleotides*
   '((#\C . #\G)

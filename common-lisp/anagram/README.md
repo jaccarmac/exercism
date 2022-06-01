@@ -1,60 +1,33 @@
 # Anagram
 
-Given a word and a list of possible anagrams, select the correct sublist.
+Welcome to Anagram on Exercism's Common Lisp Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
 
-Given `"listen"` and a list of candidates like `"enlists" "google"
-"inlets" "banana"` the program should return a list containing
-`"inlets"`.
+## Instructions
 
-## Setup
+An anagram is a rearrangement of letters to form a new word: for example `"owns"` is an anagram of `"snow"`.
+A word is not its own anagram: for example, `"stop"` is not an anagram of `"stop"`.
 
-Check out [Exercism Help](http://exercism.io/tracks/common-lisp) for instructions to
-get started writing Common Lisp. That page will explain how to install and setup
-a Lisp implementation and how to run the tests.
+Given a target word and a set of candidate words, this exercise requests the anagram set: the subset of the candidates that are anagrams of the target.
 
-## Formatting
+The target and candidates are words of one or more ASCII alphabetic characters (`A`-`Z` and `a`-`z`).
+Lowercase and uppercase characters are equivalent: for example, `"PoTS"` is an anagram of `"sTOp"`, but `StoP` is not an anagram of `sTOp`.
+The anagram set is the subset of the candidate set that are anagrams of the target (in any order).
+Words in the anagram set should have the same letter case as in the candidate set.
 
-While Common Lisp doesn't care about indentation and layout of code,
-nor whether you use spaces or tabs, this is an important consideration
-for submissions to exercism.io. Excercism.io's code widget cannot
-handle mixing of tab and space characters well so using only spaces is recommended to make
-the code more readable to the human reviewers. Please review your
-editors settings on how to accomplish this. Below are instructions for
-popular editors for Common Lisp.
-
-### VIM
-
-Use the following commands to ensure VIM uses only spaces for
-indentation:
-
-```vimscript
-:set tabstop=2
-:set shiftwidth=2
-:set expandtab
-```
-
-(or as a oneliner `:set tabstop=2 shiftwidth=2 expandtab`). This can
-be added to your `~/.vimrc` file to use it all the time.
-
-### Emacs
-
-Emacs is very well suited for editing Common Lisp and has many
-powerful add-on packages available. The only thing that one needs to
-do with a stock emacs to make it work well with exercism.io is to
-evaluate the following code:
-
-`(setq-default indent-tab-mode nil)`
-
-This can be placed in your `~/.emacs` (or `~/.emacs.d/init.el`) in
-order to have it set whenever Emacs is launched.
-
-One suggested add-on for Emacs and Common Lisp is
-[SLIME](https://github.com/slime/slime) which offers tight integration
-with the REPL; making iterative coding and testing very easy.
+Given the target `"stone"` and candidates `"stone"`, `"tones"`, `"banana"`, `"tons"`, `"notes"`, `"Seton"`, the anagram set is `"tones"`, `"notes"`, `"Seton"`.
 
 ## Source
 
-Inspired by the Extreme Startup game [https://github.com/rchatley/extreme_startup](https://github.com/rchatley/extreme_startup)
+### Created by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @verdammelt
+
+### Contributed to by
+
+- @dnmfarrell
+- @spacebat
+
+### Based on
+
+Inspired by the Extreme Startup game - https://github.com/rchatley/extreme_startup

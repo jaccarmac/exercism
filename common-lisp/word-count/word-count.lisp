@@ -1,8 +1,8 @@
 (in-package #:cl-user)
-(defpackage #:phrase
+(defpackage #:word-count
   (:use #:cl)
-  (:export #:word-count))
-(in-package #:phrase)
+  (:export #:count-words))
+(in-package #:word-count)
 
 (defun words-in (phrase)
   (loop for beg = (position-if #'alphanumericp phrase)
@@ -20,7 +20,7 @@
       counts
       (cons count counts)))
 
-(defun word-count (phrase)
+(defun count-words (phrase)
   (reduce #'add-count-if-not-present
           (reduce #'inc-word-counts (words-in phrase) :initial-value nil)
           :initial-value nil))

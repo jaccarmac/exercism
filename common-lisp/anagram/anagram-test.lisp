@@ -1,55 +1,82 @@
-(require 'asdf)
-(require 'lisp-unit)
-#-xlisp-test (load "anagram")
+;; Ensures that anagram.lisp and the testing library are always loaded
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (load "anagram")
+  (quicklisp-client:quickload :fiveam))
 
-(defpackage #:anagram-test
-  (:use #:common-lisp #:lisp-unit))
+;; Defines the testing package with symbols from anagram and FiveAM in scope
+;; The `run-tests` function is exported for use by both the user and test-runner
+(defpackage :anagram-test
+  (:use :cl :fiveam)
+  (:export :run-tests))
 
-(in-package #:anagram-test)
+;; Enter the testing package
+(in-package :anagram-test)
 
-(define-test no-matches
-  (assert-equal '()
-      (anagram:anagrams-for
-       "diaper"
-       '("hello" "world" "zombies" "pants"))))
+;; Define and enter a new FiveAM test-suite
+(def-suite* anagram-suite)
 
-(define-test detect-simple-anagram
-  (assert-equal '("tan")
-      (anagram:anagrams-for "ant" '("tan" "stand" "at"))))
+(test no-matches
+  (is (equal nil
+             (anagram:anagrams-for "diaper" '("hello" "world" "zombies" "pants")))))
 
-(define-test does-not-confuse-different-duplicates
-  (assert-equal '() (anagram:anagrams-for "galea" '("eagle"))))
+(test detects-two-anagrams
+  (is (equal '("lemons" "melons")
+             (anagram:anagrams-for "solemn" '("lemons" "cherry" "melons")))))
 
-(define-test eliminate-anagram-subsets
-  (assert-equal '() (anagram:anagrams-for "good" '("dog" "goody"))))
+(test does-not-detect-anagram-subsets
+  (is (equal nil (anagram:anagrams-for "good" '("dog" "goody")))))
 
-(define-test detect-anagram
-  (assert-equal '("inlets")
-      (anagram:anagrams-for
-       "listen"
-       '("enlists" "google" "inlets" "banana"))))
+(test detect-anagram
+  (is (equal '("inlets")
+             (anagram:anagrams-for "listen"
+                                   '("enlists" "google" "inlets" "banana")))))
 
-(define-test multiple-anagrams
-  (assert-equal '("gallery" "regally" "largely")
-      (anagram:anagrams-for
-       "allergy"
-       '("gallery" "ballerina" "regally" "clergy" "largely" "leading"))))
+(test detects-three-anagrams
+  (is (equal '("gallery" "regally" "largely")
+             (anagram:anagrams-for "allergy"
+                                   '("gallery" "ballerina" "regally" "clergy"
+                                     "largely" "leading")))))
 
-(define-test case-insensitive-anagrams
-  (assert-equal '("Carthorse")
-      (anagram:anagrams-for
-       "Orchestra"
-       '("cashregister" "Carthorse" "radishes"))))
+(test detects-multiple-anagrams-with-different-case
+  (is (equal '("Eons" "ONES") (anagram:anagrams-for "nose" '("Eons" "ONES")))))
 
-(define-test word-is-not-own-anagram
-  (assert-equal '()
-      (anagram:anagrams-for "banana" '("banana"))))
+(test does-not-detect-non-anagrams-with-identical-checksum
+  (is (equal nil (anagram:anagrams-for "mass" '("last")))))
 
-(define-test word-is-not-own-anagram-case-insensitively
-  (assert-equal '()
-      (anagram:anagrams-for "bananarama" '("BananaRama"))))
+(test detects-anagrams-case-insensitively
+  (is (equal '("Carthorse")
+             (anagram:anagrams-for "Orchestra"
+                                   '("cashregister" "Carthorse" "radishes")))))
 
-#-xlisp-test
-(let ((*print-errors* t)
-      (*print-failures* t))
-  (run-tests :all :anagram-test))
+(test detects-anagrams-using-case-insensitive-subject
+  (is (equal '("carthorse")
+             (anagram:anagrams-for "Orchestra"
+                                   '("cashregister" "carthorse" "radishes")))))
+
+(test detects-anagrams-using-case-insensitive-possible-matches
+  (is (equal '("Carthorse")
+             (anagram:anagrams-for "orchestra"
+                                   '("cashregister" "Carthorse" "radishes")))))
+
+(test does-not-detect-an-anagram-if-the-original-word-is-repeated
+  (is (equal nil (anagram:anagrams-for "go" '("go" "Go" "GO")))))
+
+(test anagrams-must-use-all-letters-exactly-once
+  (is (equal nil (anagram:anagrams-for "tapper" '("patter")))))
+
+(test words-are-not-anagrams-of-themselves
+  (is (equal nil (anagram:anagrams-for "BANANA" '("BANANA")))))
+
+(test words-are-not-anagrams-of-themselves-even-if-letter-case-is-partially-different
+  (is (equal nil (anagram:anagrams-for "BANANA" '("Banana"))))  )
+
+(test words-are-not-anagrams-of-themselves-even-if-letter-case-is-completely-different
+  (is (equal nil (anagram:anagrams-for "BANANA" '("banana"))))  )
+
+(test words-other-than-themselves-can-be-anagrams
+  (is (equal '("Silent") (anagram:anagrams-for "LISTEN" '("LISTEN" "Silent")))))
+
+
+(defun run-tests (&optional (test-or-suite 'anagram-suite))
+  "Provides human readable results of test run. Default to entire suite."
+  (run! test-or-suite))
