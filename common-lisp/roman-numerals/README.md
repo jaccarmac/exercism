@@ -1,5 +1,10 @@
 # Roman Numerals
 
+Welcome to Roman Numerals on Exercism's Common Lisp Track.
+If you need help running the tests or submitting your code, check out `HELP.md`.
+
+## Instructions
+
 Write a function to convert from normal numbers to Roman Numerals.
 
 The Romans were a clever bunch. They conquered most of Europe and ruled
@@ -8,7 +13,7 @@ even bikinis. One thing they never discovered though was the number
 zero. This made writing and dating extensive histories of their exploits
 slightly more challenging, but the system of numbers they came up with
 is still in use today. For example the BBC uses Roman numerals to date
-their programmes.
+their programs.
 
 The Romans wrote numbers using letters - I, V, X, L, C, D, M. (notice
 these letters have lots of straight lines and are hence easy to hack
@@ -40,57 +45,18 @@ In Roman numerals 1990 is MCMXC:
 2000=MM
 8=VIII
 
-See also: http://www.novaroma.org/via_romana/numbers.html
-
-## Setup
-
-Check out [Exercism Help](http://exercism.io/tracks/common-lisp) for instructions to
-get started writing Common Lisp. That page will explain how to install and setup
-a Lisp implementation and how to run the tests.
-
-## Formatting
-
-While Common Lisp doesn't care about indentation and layout of code,
-nor whether you use spaces or tabs, this is an important consideration
-for submissions to exercism.io. Excercism.io's code widget cannot
-handle mixing of tab and space characters well so using only spaces is recommended to make
-the code more readable to the human reviewers. Please review your
-editors settings on how to accomplish this. Below are instructions for
-popular editors for Common Lisp.
-
-### VIM
-
-Use the following commands to ensure VIM uses only spaces for
-indentation:
-
-```vimscript
-:set tabstop=2
-:set shiftwidth=2
-:set expandtab
-```
-
-(or as a oneliner `:set tabstop=2 shiftwidth=2 expandtab`). This can
-be added to your `~/.vimrc` file to use it all the time.
-
-### Emacs
-
-Emacs is very well suited for editing Common Lisp and has many
-powerful add-on packages available. The only thing that one needs to
-do with a stock emacs to make it work well with exercism.io is to
-evaluate the following code:
-
-`(setq-default indent-tab-mode nil)`
-
-This can be placed in your `~/.emacs` (or `~/.emacs.d/init.el`) in
-order to have it set whenever Emacs is launched.
-
-One suggested add-on for Emacs and Common Lisp is
-[SLIME](https://github.com/slime/slime) which offers tight integration
-with the REPL; making iterative coding and testing very easy.
+See also: [http://www.novaroma.org/via_romana/numbers.html](http://www.novaroma.org/via_romana/numbers.html)
 
 ## Source
 
-The Roman Numeral Kata [http://codingdojo.org/cgi-bin/index.pl?KataRomanNumerals](http://codingdojo.org/cgi-bin/index.pl?KataRomanNumerals)
+### Created by
 
-## Submitting Incomplete Solutions
-It's possible to submit an incomplete solution so you can see how others have completed the exercise.
+- @wobh
+
+### Contributed to by
+
+- @dnmfarrell
+
+### Based on
+
+The Roman Numeral Kata - http://codingdojo.org/cgi-bin/index.pl?KataRomanNumerals
