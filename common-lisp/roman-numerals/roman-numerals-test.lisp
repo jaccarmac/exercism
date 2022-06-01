@@ -2,10 +2,10 @@
 (require 'lisp-unit)
 #-xlisp-test (load "roman")
 
-(defpackage #:roman-test
+(defpackage #:roman-numerals-test
   (:use #:cl #:lisp-unit))
 
-(in-package #:roman-test)
+(in-package #:roman-numerals-test)
 
 (define-test test-1
   (assert-equal "I" (roman:romanize 1)))
@@ -64,4 +64,4 @@
 #-xlisp-test
 (let ((*print-errors* t)
       (*print-failures* t))
-  (run-tests :all :roman-test))
+  (run-tests :all :roman-numerals-test))
