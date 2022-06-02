@@ -1,2 +1,2 @@
 (specifications->manifest
- '("ghc" "ghc-hspec"))
+ '("ghc" "gcc-toolchain" "ghc-hspec"))
