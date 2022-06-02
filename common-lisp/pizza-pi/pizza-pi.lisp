@@ -5,10 +5,14 @@
 
 (in-package :pizza-pi)
 
-(defun dough-calculator (pizzas diameter))
+(defun dough-calculator (pizzas diameter)
+  (round (* pizzas (+ 200 (/ (* 45 pi diameter) 20)))))
 
-(defun size-from-sauce (sauce))
+(defun size-from-sauce (sauce)
+  (sqrt (/ (* 40 sauce) (* 3 pi))))
 
-(defun pizzas-per-cube (cube-size diameter))
+(defun pizzas-per-cube (cube-size diameter)
+  (floor (/ (* 2 (expt cube-size 3)) (* 3 pi (expt diameter 2)))))
 
-(defun fair-share-p (pizzas friends))
+(defun fair-share-p (pizzas friends)
+  (zerop (mod (* 8 pizzas) friends)))
