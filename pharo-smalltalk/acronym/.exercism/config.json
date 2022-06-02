@@ -1,0 +1,22 @@
+{
+  "blurb": "Convert a long phrase to its acronym",
+  "authors": [
+    "macta"
+  ],
+  "contributors": [
+    "bencoman"
+  ],
+  "files": {
+    "solution": [
+      "Acronym.class.st"
+    ],
+    "test": [
+      "AcronymTest.class.st"
+    ],
+    "example": [
+      ".meta/solution/Acronym.class.st"
+    ]
+  },
+  "source": "Julien Vanier",
+  "source_url": "https://github.com/monkbroc"
+}
