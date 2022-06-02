@@ -7,7 +7,14 @@
 (defun words-in (phrase)
   (loop for beg = (position-if #'alphanumericp phrase)
           then (position-if #'alphanumericp phrase :start (1+ end))
-        for end = (and beg (position-if-not #'alphanumericp phrase :start beg))
+        for end = (and beg
+                       (let ((end-candidate (position-if-not #'alphanumericp phrase :start beg)))
+                         (if (and end-candidate
+                                  (eql #\' (elt phrase end-candidate))
+                                  (< (1+ end-candidate) (length phrase))
+                                  (alphanumericp (elt phrase (1+ end-candidate))))
+                             (position-if-not #'alphanumericp phrase :start (1+ end-candidate))
+                             end-candidate)))
         when beg collect (string-downcase (subseq phrase beg end))
           while end))
 
