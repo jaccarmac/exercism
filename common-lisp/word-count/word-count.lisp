@@ -6,10 +6,10 @@
 
 (defun words-in (phrase)
   (loop for beg = (position-if #'alphanumericp phrase)
-     then (position-if #'alphanumericp phrase :start (1+ end))
-     for end = (and beg (position-if-not #'alphanumericp phrase :start beg))
-     when beg collect (string-downcase (subseq phrase beg end))
-     while end))
+          then (position-if #'alphanumericp phrase :start (1+ end))
+        for end = (and beg (position-if-not #'alphanumericp phrase :start beg))
+        when beg collect (string-downcase (subseq phrase beg end))
+          while end))
 
 (defun inc-word-counts (counts word)
   (let ((new-count (1+ (or (cdr (assoc word counts :test #'string=)) 0))))
