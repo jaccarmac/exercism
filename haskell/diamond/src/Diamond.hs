@@ -3,7 +3,8 @@ module Diamond (diamond) where
 import           Data.Char (chr, ord)
 
 diamond :: Char -> Maybe [String]
-diamond c = Just $ mirrorRows $ padRows (diamondRowsFrom c) maxDepth
+diamond c | c < 'A' || c > 'Z' = Nothing
+          | otherwise = pure $ mirrorRows $ padRows (diamondRowsFrom c) maxDepth
   where maxDepth = ord c - ord 'A'
 
 mirrorRows :: [String] -> [String]
