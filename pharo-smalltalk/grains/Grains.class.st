@@ -24,21 +24,26 @@ Grains class >> new [
 { #category : #'instance creation' }
 Grains class >> new: aNumberOfSquares [
 
-	^ super new setSquares: aNumberOfSquares
+	^ self basicNew setSquares: aNumberOfSquares
 ]
 
 { #category : #accessing }
-Grains >> atSquare: aSquare [
+Grains >> atSquare: aNumber [
 
 	"Answer the number of grains on a given square."
 
-	^ 2 raisedTo: (self validate: aSquare) - 1
+	^ 2 raisedTo: (self validSquare: aNumber) - 1
 ]
 
 { #category : #'private - initialization' }
 Grains >> setSquares: aNumberOfSquares [
 
 	squares := aNumberOfSquares
+]
+
+{ #category : #'private - accessing' }
+Grains >> squares [
+	^ squares
 ]
 
 { #category : #accessing }
@@ -50,7 +55,7 @@ Grains >> total [
 ]
 
 { #category : #'private - validation' }
-Grains >> validate: aNumber [
+Grains >> validSquare: aNumber [
 
 	(aNumber between: 1 and: squares) ifFalse: [ 
 		self error: ('square must be between 1 and {1}' format: { squares }) ].
