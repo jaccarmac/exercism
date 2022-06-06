@@ -15,18 +15,6 @@ Class {
 	#category : #'Exercise@Grains'
 }
 
-{ #category : #'instance creation' }
-Grains class >> new [
-
-	^ self new: 64
-]
-
-{ #category : #'instance creation' }
-Grains class >> new: aNumberOfSquares [
-
-	^ self basicNew setSquares: aNumberOfSquares
-]
-
 { #category : #accessing }
 Grains >> atSquare: aNumber [
 
@@ -35,14 +23,16 @@ Grains >> atSquare: aNumber [
 	^ 2 raisedTo: (self validSquare: aNumber) - 1
 ]
 
-{ #category : #'private - initialization' }
-Grains >> setSquares: aNumberOfSquares [
+{ #category : #initialization }
+Grains >> initialize [
 
-	squares := aNumberOfSquares
+	super initialize.
+	squares := 64
 ]
 
-{ #category : #'private - accessing' }
+{ #category : #accessing }
 Grains >> squares [
+
 	^ squares
 ]
 
@@ -51,13 +41,14 @@ Grains >> total [
 
 	"Answer the total number of grains across all squares."
 
-	^ ((1 to: squares) collect: [ :s | self atSquare: s ]) sum
+	^ ((1 to: self squares) collect: [ :s | self atSquare: s ]) sum
 ]
 
-{ #category : #'private - validation' }
+{ #category : #validating }
 Grains >> validSquare: aNumber [
 
-	(aNumber between: 1 and: squares) ifFalse: [ 
-		self error: ('square must be between 1 and {1}' format: { squares }) ].
+	(aNumber between: 1 and: self squares) ifFalse: [ 
+		self error:
+			('square must be between 1 and {1}' format: { self squares }) ].
 	^ aNumber
 ]

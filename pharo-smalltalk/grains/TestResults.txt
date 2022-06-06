@@ -1,4 +1,4 @@
-Tested on: 2022-06-06 12:00
+Tested on: 2022-06-06 14:26
 11 run, 11 passes, 0 skipped, 0 failures, 0 errors.
 Used OS/Platform: unix linux-gnu x86_64
 Image version: Pharo11.0.0 build: 73 (64 Bit)
