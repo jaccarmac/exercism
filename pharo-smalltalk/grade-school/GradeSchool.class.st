@@ -24,10 +24,7 @@ GradeSchool >> desiredGrade: anInteger [
 GradeSchool >> initialize [
 
 	super initialize.
-	roster := SortedCollection sortUsing: [ :s1 :s2 | 
-		          s1 second = s2 second
-			          ifFalse: [ s1 second < s2 second ]
-			          ifTrue: [ s1 first < s2 first ] ]
+	roster := SortedCollection sortUsing: #second ascending, #first ascending
 ]
 
 { #category : #accessing }
