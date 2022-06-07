@@ -2,7 +2,7 @@ Class {
 	#name : #GradeSchool,
 	#superclass : #Object,
 	#instVars : [
-		'roster'
+		'students'
 	],
 	#category : #'Exercise@GradeSchool'
 }
@@ -10,25 +10,33 @@ Class {
 { #category : #accessing }
 GradeSchool >> addStudents: aCollection [
 
-	roster addAll: aCollection
+	students addAll: aCollection
 ]
 
 { #category : #accessing }
 GradeSchool >> desiredGrade: anInteger [
 
-	^ (roster select: [ :s | s second = anInteger ] thenCollect: #first)
-		  asArray
+	^ self students
+		  select: [ :s | s second = anInteger ]
+		  thenCollect: #first
 ]
 
 { #category : #initialization }
 GradeSchool >> initialize [
 
 	super initialize.
-	roster := SortedCollection sortUsing: #second ascending, #first ascending
+	students := SortedCollection sortUsing:
+		            #second ascending , #first ascending
 ]
 
 { #category : #accessing }
 GradeSchool >> roster [
 
-	^ (roster collect: #first) asArray
+	^ self students collect: #first
+]
+
+{ #category : #accessing }
+GradeSchool >> students [
+
+	^ students asArray
 ]
